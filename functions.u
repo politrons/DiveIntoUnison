@@ -3,8 +3,8 @@ use .base.Text
 use .base.Int
 use .base.List
 
--- Definition of simple functions in UNISON
--- ---------------------------------------
+-- Normal Function
+-- -------------------
 
 toUpper : Text -> Text
 toUpper input = Text.toUppercase input
@@ -24,26 +24,53 @@ multiplyFunc n1 n2 = n1 * n2
 transformIntToText: Int -> Text
 transformIntToText number = Int.toText(number)
 
-intsToTexts : [Int] -> [Text]
-intsToTexts ints = List.map Int.toText ints
+transformIntsToTexts : [Int] -> [Text]
+transformIntsToTexts ints = List.map Int.toText ints
 
 joinWithCommas : [Text] -> Text
 joinWithCommas texts = Text.join ", " texts
 
---Filter functions
+--[Filter] functions
 -- ----------------
 higherThan : Int -> Boolean
 higherThan n = n > +10
 
-filterArray: (Int -> Boolean) -> [Int] -> [Int]
-filterArray predicate numbers = List.filter predicate numbers
+filterIntArray: (Int -> Boolean) -> [Int] -> [Int]
+filterIntArray predicate numbers = List.filter predicate numbers
 
+isHelloOrWorld : Text -> Boolean
+isHelloOrWorld text =
+  match text with
+    "hello" -> true
+    "world" -> true
+    _ -> false
+
+filterTextArray: (Text -> Boolean) -> [Text] -> [Text]
+filterTextArray predicate strings = List.filter predicate strings
+
+--[Map] functions
+-- -------------------
+
+toUpperCaseArray: (Text -> Text) -> [Text] -> [Text]
+toUpperCaseArray transform strings = List.map transform strings
+
+--Main
+-- ------
 functions : '{IO, Exception} ()
 --functions _ =  printLine (toLower "HELLO, UNISON!")
 --functions _ = printLine (addText "hello, unison!" "!!")
 --functions _ = printLine (transformIntToText(sumFunc +100 +200))
 --functions _ = printLine (transformIntToText(multiplyFunc +10 +15))
+--functions _ =
+--        let
+--        numbers = [+4,+11,+5,+12,+6,+13]
+--        printLine (joinWithCommas(transformIntsToTexts(filterIntArray higherThan numbers)))
+--functions _ =
+--        let
+--        strings = ["aloha", "hello","politrons","world"]
+--        printLine (joinWithCommas(filterTextArray isHelloOrWorld strings))
+
 functions _ =
         let
-        numbers = [+4,+11,+5,+12,+6,+13]
-        printLine (joinWithCommas(intsToTexts(filterArray higherThan numbers)))
+        strings = ["hello", "unison","functional","world"]
+        printLine (joinWithCommas(toUpperCaseArray toUpper strings))
