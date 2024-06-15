@@ -3,41 +3,53 @@ use .base.Text
 use .base.Int
 use .base.List
 
--- Normal Function
--- -------------------
+--[Normal Functions]
+-- -----------------
 
+--Converts the input text to uppercase
 toUpper : Text -> Text
 toUpper input = Text.toUppercase input
 
+--Converts the input text to lowercase
 toLower : Text -> Text
 toLower input = Text.toLowercase input
 
+--Concatenates two texts, converting the first text to uppercase
 addText : Text -> Text -> Text
 addText input text = toUpper input ++ text
 
+--Adds two integers
 sumFunc:  Int -> Int -> Int
 sumFunc n1 n2 = n1 + n2
 
+--Multiplies two integers
 multiplyFunc: Int -> Int -> Int
 multiplyFunc n1 n2 = n1 * n2
 
+--Converts an integer to text
 transformIntToText: Int -> Text
-transformIntToText number = Int.toText(number)
+transformIntToText number = Int.toText number
 
+--Converts a list of integers to a list of texts
 transformIntsToTexts : [Int] -> [Text]
 transformIntsToTexts ints = List.map Int.toText ints
 
+--Joins a list of texts with commas
 joinWithCommas : [Text] -> Text
 joinWithCommas texts = Text.join ", " texts
 
---[Filter] functions
--- ----------------
+--[Filter Functions]
+-- --------------
+
+--Returns true if the integer is greater than 10
 higherThan : Int -> Boolean
 higherThan n = n > +10
 
+--Filters the list of integers, keeping only those that satisfy the predicate
 filterIntArray: (Int -> Boolean) -> [Int] -> [Int]
 filterIntArray predicate numbers = List.filter predicate numbers
 
+--Returns true if the text is "hello" or "world"
 isHelloOrWorld : Text -> Boolean
 isHelloOrWorld text =
   match text with
@@ -45,41 +57,63 @@ isHelloOrWorld text =
     "world" -> true
     _ -> false
 
+--Filters the list of texts, keeping only those that satisfy the predicate
 filterTextArray: (Text -> Boolean) -> [Text] -> [Text]
 filterTextArray predicate strings = List.filter predicate strings
 
---[Map] functions
--- -------------------
+--[Map Functions]
+-- -----------------
+
+--Maps the transform function over a list of texts
 mapValuesArray: (Text -> Text) -> [Text] -> [Text]
 mapValuesArray transform strings = List.map transform strings
 
+--Adds dollar signs around the input text
 addDollarAroundText: Text -> Text
 addDollarAroundText text = "$" ++ text ++ "$"
 
---Main
--- ------
+--[Main Execution]
+-- ------------
 functions : '{IO, Exception} ()
+--Example 1: Converts "HELLO, UNISON!" to lowercase and prints it
 --functions _ =  printLine (toLower "HELLO, UNISON!")
+
+--Example 2: Converts "hello, unison!" to uppercase, concatenates with "!!", and prints
 --functions _ = printLine (addText "hello, unison!" "!!")
+
+-- Example 3: Converts the sum of 100 and 200 to text and prints
 --functions _ = printLine (transformIntToText(sumFunc +100 +200))
+
+--Example 4: Converts the product of 10 and 15 to text and prints
 --functions _ = printLine (transformIntToText(multiplyFunc +10 +15))
+
+--Example 5: Filters a list of numbers to include only those greater than 10, converts them to text, joins with commas, and prints
 --functions _ =
 --        let
---        numbers = [+4,+11,+5,+12,+6,+13]
+--        numbers = [+4, +11, +5, +12, +6, +13]
 --        printLine (joinWithCommas(transformIntsToTexts(filterIntArray higherThan numbers)))
+
+--Example 6: Filters a list of strings to include only "hello" or "world", joins them with commas, and prints
 --functions _ =
 --        let
---        strings = ["aloha", "hello","politrons","world"]
+--        strings = ["aloha", "hello", "politrons", "world"]
 --        printLine (joinWithCommas(filterTextArray isHelloOrWorld strings))
+
+--Example 7: Converts each string in the list to uppercase, joins them with commas, and prints
 --functions _ =
 --        let
---        strings = ["hello", "unison","functional","world"]
+--        strings = ["hello", "unison", "functional", "world"]
 --        printLine (joinWithCommas(mapValuesArray toUpper strings))
+
+--Example 8: Adds dollar signs around each string in the list, joins them with commas, and prints
 --functions _ =
 --        let
---        strings = ["hello", "unison","functional","world"]
+--        strings = ["hello", "unison", "functional", "world"]
 --        printLine (joinWithCommas(mapValuesArray addDollarAroundText strings))
+
+--Main Example: Adds dollar signs around each string, converts to uppercase, joins with commas, and prints
 functions _ =
         let
-        strings = ["hello", "unison","functional","world"]
-        printLine (joinWithCommas(mapValuesArray toUpper (mapValuesArray addDollarAroundText strings))
+        strings = ["hello", "unison", "functional", "world"]
+        printLine (joinWithCommas(mapValuesArray toUpper(mapValuesArray addDollarAroundText strings)))
+
