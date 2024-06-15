@@ -24,7 +24,7 @@ transformIntToText: Int -> Text
 transformIntToText number = Int.toText(number)
 
 functions : '{IO, Exception} ()
---functions _ =  printLine (toLower "HELLO, UNISON!")
-functions _ = printLine (addText "hello, unison!" "!!")
+functions _ =  printLine (toLower "HELLO, UNISON!")
+--functions _ = printLine (addText "hello, unison!" "!!")
 --functions _ = printLine (transformIntToText(sumFunc +100 +200))
 --functions _ = printLine (transformIntToText(multiplyFunc +10 +15))
