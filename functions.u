@@ -1,0 +1,30 @@
+use .base.io.IO
+use .base.Text
+use .base.Int
+
+-- Definition of simple functions in UNISON
+-- ---------------------------------------
+
+toUpper : Text -> Text
+toUpper input = Text.toUppercase input
+
+toLower : Text -> Text
+toLower input = Text.toLowercase input
+
+addText : Text -> Text -> Text
+addText input text = toUpper input ++ text
+
+sumFunc:  Int -> Int -> Int
+sumFunc n1 n2 = n1 + n2
+
+multiplyFunc: Int -> Int -> Int
+multiplyFunc n1 n2 = n1 * n2
+
+transformIntToText: Int -> Text
+transformIntToText number = Int.toText(number)
+
+functions : '{IO, Exception} ()
+--functions _ =  printLine (toLower "HELLO, UNISON!")
+functions _ = printLine (addText "hello, unison!" "!!")
+--functions _ = printLine (transformIntToText(sumFunc +100 +200))
+--functions _ = printLine (transformIntToText(multiplyFunc +10 +15))

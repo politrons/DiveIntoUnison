@@ -1,0 +1,3 @@
+usingAbilitiesPt1.helloWorld : '{IO, Exception} ()
+usingAbilitiesPt1.helloWorld _ = printLine "Hello World!"
+
