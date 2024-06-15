@@ -1,6 +1,7 @@
 use .base.io.IO
 use .base.Text
 use .base.Int
+use .base.List
 
 -- Definition of simple functions in UNISON
 -- ---------------------------------------
@@ -23,8 +24,26 @@ multiplyFunc n1 n2 = n1 * n2
 transformIntToText: Int -> Text
 transformIntToText number = Int.toText(number)
 
+intsToTexts : [Int] -> [Text]
+intsToTexts ints = List.map Int.toText ints
+
+joinWithCommas : [Text] -> Text
+joinWithCommas texts = Text.join ", " texts
+
+--Filter functions
+-- ----------------
+higherThan : Int -> Boolean
+higherThan n = n > +10
+
+filterArray: (Int -> Boolean) -> [Int] -> [Int]
+filterArray predicate numbers = List.filter predicate numbers
+
 functions : '{IO, Exception} ()
-functions _ =  printLine (toLower "HELLO, UNISON!")
+--functions _ =  printLine (toLower "HELLO, UNISON!")
 --functions _ = printLine (addText "hello, unison!" "!!")
 --functions _ = printLine (transformIntToText(sumFunc +100 +200))
 --functions _ = printLine (transformIntToText(multiplyFunc +10 +15))
+functions _ =
+        let
+        numbers = [+4,+11,+5,+12,+6,+13]
+        printLine (joinWithCommas(intsToTexts(filterArray higherThan numbers)))
