@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="unison">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/racket/unison.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
