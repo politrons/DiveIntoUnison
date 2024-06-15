@@ -50,9 +50,11 @@ filterTextArray predicate strings = List.filter predicate strings
 
 --[Map] functions
 -- -------------------
+mapValuesArray: (Text -> Text) -> [Text] -> [Text]
+mapValuesArray transform strings = List.map transform strings
 
-toUpperCaseArray: (Text -> Text) -> [Text] -> [Text]
-toUpperCaseArray transform strings = List.map transform strings
+addDollarAroundText: Text -> Text
+addDollarAroundText text = "$" ++ text ++ "$"
 
 --Main
 -- ------
@@ -69,8 +71,15 @@ functions : '{IO, Exception} ()
 --        let
 --        strings = ["aloha", "hello","politrons","world"]
 --        printLine (joinWithCommas(filterTextArray isHelloOrWorld strings))
-
+--functions _ =
+--        let
+--        strings = ["hello", "unison","functional","world"]
+--        printLine (joinWithCommas(mapValuesArray toUpper strings))
+--functions _ =
+--        let
+--        strings = ["hello", "unison","functional","world"]
+--        printLine (joinWithCommas(mapValuesArray addDollarAroundText strings))
 functions _ =
         let
         strings = ["hello", "unison","functional","world"]
-        printLine (joinWithCommas(toUpperCaseArray toUpper strings))
+        printLine (joinWithCommas(mapValuesArray toUpper (mapValuesArray addDollarAroundText strings))
