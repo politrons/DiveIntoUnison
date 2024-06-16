@@ -34,6 +34,9 @@ transformIntToText number = Int.toText number
 transformIntsToTexts : [Int] -> [Text]
 transformIntsToTexts ints = List.map Int.toText ints
 
+transformIntToTexts : Int -> Text
+transformIntToTexts n = Int.toText n
+
 --Joins a list of texts with commas
 joinWithCommas : [Text] -> Text
 joinWithCommas texts = Text.join ", " texts
@@ -74,8 +77,13 @@ addDollarAroundText text = "$" ++ text ++ "$"
 
 --[Higher-order Functions]
 -- -----------------------
+--Higher order function that receive a function as first input argument
 multiplyValuesArray: (Int -> Int) -> [Int] -> [Int]
 multiplyValuesArray func numbers = List.map func numbers
+
+--Higher order function that receive an Int and return a Function (Int -> Int)
+returnSumFunc: Int -> (Int -> Int)
+returnSumFunc n1 = n2 -> n1 + n2
 
 multiplyBy10: Int -> Int
 multiplyBy10 n = n * +10
@@ -125,8 +133,13 @@ functions : '{IO, Exception} ()
 --        strings = ["hello", "unison", "functional", "world"]
 --        printLine (joinWithCommas(mapValuesArray toUpper(mapValuesArray addDollarAroundText strings)))
 
+--functions _ =
+--        let
+--        numbers = [+1, +2, +3, +4, +5, +6]
+--        result = multiplyValuesArray multiplyBy10 numbers
+--        printLine (joinWithCommas(transformIntsToTexts(result)))
 functions _ =
-        let
-        numbers = [+1, +2, +3, +4, +5, +6]
-        result = multiplyValuesArray multiplyBy10 numbers
-        printLine (joinWithCommas(transformIntsToTexts(result)))
+         let
+         funcResult = returnSumFunc +10
+         result = funcResult +30
+         printLine (transformIntToTexts(result))
