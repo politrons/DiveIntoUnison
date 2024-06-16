@@ -3,7 +3,14 @@ use .base.io.Process
 use .base.Text
 use .base.Exception
 
+--[Functions]
+-- ----------
+toUpperCase: Text -> Text
+toUpperCase input = Text.toUppercase input
 
+
+--[Server]
+-- --------
 HttpServer : '{IO, Exception} ()
 HttpServer = do
   use Nat *
@@ -14,9 +21,11 @@ HttpServer = do
   sleepMicroseconds (24 * 60 * 60 * 1000000)
   !stopServer
 
+-- [Handler]
+-- ----------
 helloHandler : Handler IO
 helloHandler =
   Handler cases
     req| Routes.get (root Path./ "hello") req  ->
-      HttpResponse.ok (Body (Text.toUtf8 "Hello Unison World"))
+      HttpResponse.ok (Body (Text.toUtf8 (toUpperCase "Hello Unison World")))
     _ -> abort
