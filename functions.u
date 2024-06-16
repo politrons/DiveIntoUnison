@@ -128,4 +128,5 @@ functions : '{IO, Exception} ()
 functions _ =
         let
         numbers = [+1, +2, +3, +4, +5, +6]
-        printLine (joinWithCommas(transformIntsToTexts(multiplyValuesArray multiplyBy10 numbers)))
+        result = multiplyValuesArray multiplyBy10 numbers
+        printLine (joinWithCommas(transformIntsToTexts(result)))
