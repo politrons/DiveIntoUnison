@@ -72,6 +72,14 @@ mapValuesArray transform strings = List.map transform strings
 addDollarAroundText: Text -> Text
 addDollarAroundText text = "$" ++ text ++ "$"
 
+--[Higher-order Functions]
+-- -----------------------
+multiplyValuesArray: (Int -> Int) -> [Int] -> [Int]
+multiplyValuesArray func numbers = List.map func numbers
+
+multiplyBy10: Int -> Int
+multiplyBy10 n = n * +10
+
 --[Main Execution]
 -- ------------
 functions : '{IO, Exception} ()
@@ -111,9 +119,13 @@ functions : '{IO, Exception} ()
 --        strings = ["hello", "unison", "functional", "world"]
 --        printLine (joinWithCommas(mapValuesArray addDollarAroundText strings))
 
---Main Example: Adds dollar signs around each string, converts to uppercase, joins with commas, and prints
+--Example 9: Adds dollar signs around each string, converts to uppercase, joins with commas, and prints
+--functions _ =
+--        let
+--        strings = ["hello", "unison", "functional", "world"]
+--        printLine (joinWithCommas(mapValuesArray toUpper(mapValuesArray addDollarAroundText strings)))
+
 functions _ =
         let
-        strings = ["hello", "unison", "functional", "world"]
-        printLine (joinWithCommas(mapValuesArray toUpper(mapValuesArray addDollarAroundText strings)))
-
+        numbers = [+1, +2, +3, +4, +5, +6]
+        printLine (joinWithCommas(transformIntsToTexts(multiplyValuesArray multiplyBy10 numbers)))
