@@ -88,6 +88,12 @@ returnSumFunc n1 = n2 -> n1 + n2
 multiplyBy10: Int -> Int
 multiplyBy10 n = n * +10
 
+--[Currying Functions]
+-- --------------------
+--`curryingFunc` is a curried function that takes three `Text` inputs and concatenates them.
+curryingFunc : Text -> Text -> Text -> Text
+curryingFunc t1 t2 t3 = t1 ++ " " ++ t2 ++ " " ++ t3
+
 --[Main Execution]
 -- ------------
 functions : '{IO, Exception} ()
@@ -138,8 +144,18 @@ functions : '{IO, Exception} ()
 --        numbers = [+1, +2, +3, +4, +5, +6]
 --        result = multiplyValuesArray multiplyBy10 numbers
 --        printLine (joinWithCommas(transformIntsToTexts(result)))
+--functions _ =
+--         let
+--         funcResult = returnSumFunc +10
+--         result = funcResult +30
+--         printLine (transformIntToTexts(result))
+
 functions _ =
          let
-         funcResult = returnSumFunc +10
-         result = funcResult +30
-         printLine (transformIntToTexts(result))
+         --Partially apply `curryingFunc` with the first argument
+         curryingFunc1 = curryingFunc "hello"
+         --Partially apply `curryingFunc1` with the second argument
+         curryingFunc2 = curryingFunc1 "currying"
+         --Apply `curryingFunc2` with the final argument
+         result = curryingFunc2 "function"
+         printLine result
