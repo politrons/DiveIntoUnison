@@ -1,0 +1,47 @@
+use .base.io.IO
+use .base.Text
+use .base.Int
+use .base.List
+
+type Animal
+    = Dog
+    | Cat
+    | Canary
+
+type Sex = Male | Female
+
+structural type Human = Human Text Nat Sex
+
+man: Human
+man = Human "Politrons" 43 Male
+
+woman: Human
+woman = Human "Lola" 30 Female
+
+-- Pattern Matching
+-- ---------------
+
+-- Function to match on the `Animal` type and return a description
+matchAnimal: Animal -> Text
+matchAnimal animal = match animal with
+    Dog -> "I'm a Dog"
+    Cat -> "I'm a cat"
+    Canary -> "I'm a Canary"
+
+-- Function to match and deconstruct the `Human` type and return a description
+matchHumanUnbox : Human -> Text
+matchHumanUnbox human = match human with
+    Human name age Male -> "I'm a man my name is " ++ name ++ " and I have " ++ (Nat.toText age) ++ " years"
+    Human name age Female -> "I'm a woman my name is " ++ name ++ " and I have " ++ (Nat.toText age) ++ " years"
+
+-- Function to match and deconstruct the `Human` type with additional conditions (guards)
+matchHumanWithCond : Human -> Text
+matchHumanWithCond human = match human with
+    Human name age Male | age > 40 -> "I'm a man my name is " ++ name ++ " and I have " ++ (Nat.toText age) ++ " years"
+    Human name age Female | name == "Lola" -> "I'm a woman my name is " ++ name ++ " and I have " ++ (Nat.toText age) ++ " years"
+    _ -> "No match found"
+
+patternMatching : '{IO, Exception} ()
+--patternMatching _ = printLine(matchAnimal Cat)
+--patternMatching _ = printLine(matchHumanUnbox woman)
+patternMatching _ = printLine(matchHumanWithCond man)

@@ -11,8 +11,8 @@ toUpperCase input = Text.toUppercase input
 
 --[Server]
 -- --------
-HttpServer : '{IO, Exception} ()
-HttpServer = do
+httpServer : '{IO, Exception} ()
+httpServer = do
   use Nat *
   config = server.Config.Config None (Port "8081") 1000 None
   routes = Routes.default <<< helloHandler
