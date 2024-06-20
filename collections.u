@@ -1,0 +1,49 @@
+use .base.Map
+use .base.Optional
+
+-- Map
+-- -------
+
+usersMap: Map Nat Text
+usersMap = Map.fromList [(1,"Politrons"),(2,"Bob"),(3,"Osmosis")]
+
+-- List
+-- -------
+
+usersList: [Text]
+usersList =["Politrons","Bob"]
+
+getByIndex: Nat -> [Text] -> Optional Text
+getByIndex index array = List.at index array
+
+-- Add a new entry to the beginning of the list
+prependedList : [Text]
+prependedList = List.cons "Osmosis" usersList
+
+-- Add a new entry to the end of the list
+appendedList : [Text]
+appendedList = List.snoc usersList "Osmosis"
+
+
+collections : '{IO, Exception} ()
+-- [Main] Map
+-- -----------
+--collections _ =  let
+--         maybeUser = Map.lookup 1 usersMap
+--         match maybeUser with
+--            Some value -> printLine value
+--            None -> printLine "no record found"
+
+-- [Main] List
+-- -----------
+--collections _ =  let
+--                maybeUser = getByIndex 1 usersList
+--                printLine (getOrElse "No user found" maybeUser)
+--collections _ =  let
+--                newList = prependedList
+--                maybeUser = getByIndex 0 newList
+--                printLine (getOrElse "No user found" maybeUser)
+collections _ =  let
+                newList = appendedList
+                maybeUser = getByIndex 2 newList
+                printLine (getOrElse "No user found" maybeUser)
