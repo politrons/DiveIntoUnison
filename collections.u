@@ -1,11 +1,24 @@
 use .base.Map
 use .base.Optional
+use .base.Map
+use .base.Text
+use .base.List
+use .base.io
 
 -- Map
 -- -------
 
 usersMap: Map Nat Text
 usersMap = Map.fromList [(1,"Politrons"),(2,"Bob"),(3,"Osmosis")]
+
+-- Set
+-- -------
+
+usersSet: Set Nat
+usersSet = Set.fromList[1,2,3,4,5]
+
+--isMember: Nat -> Set Nat -> Boolean
+--isMember num set = Set.member num set
 
 -- List
 -- -------
@@ -24,6 +37,14 @@ prependedList = List.cons "Osmosis" usersList
 appendedList : [Text]
 appendedList = List.snoc usersList "Osmosis"
 
+foreachAndPrint: [Text] -> ()
+foreachAndPrint list = List.foreach list printLine
+
+mapListValues: (Text -> Text) -> [Text] -> [Text]
+mapListValues func list = List.map func list
+
+filterListValues: (Text -> Boolean) -> [Text] -> [Text]
+filterListValues func list = List.filter func list
 
 collections : '{IO, Exception} ()
 -- [Main] Map
@@ -33,7 +54,14 @@ collections : '{IO, Exception} ()
 --         match maybeUser with
 --            Some value -> printLine value
 --            None -> printLine "no record found"
+--collections _ =  let
+--                  newMap = [(1,"Politrons"),(2,"Bob"),(3,"Osmosis")]
+--                  foreachMapAndPrint newMap
+-- [Main] Set
+-- -----------
 
+-- collections _ =  let
+--                    printLine (Text.fromBoolean(isMember 1 usersSet))
 -- [Main] List
 -- -----------
 --collections _ =  let
@@ -43,7 +71,20 @@ collections : '{IO, Exception} ()
 --                newList = prependedList
 --                maybeUser = getByIndex 0 newList
 --                printLine (getOrElse "No user found" maybeUser)
+-- collections _ =  let
+--                newList = appendedList
+--                maybeUser = getByIndex 2 newList
+--                printLine (getOrElse "No user found" maybeUser)
+-- collections _ =  let
+--                  newList = ["Hello", "Pure", "Functional","World"]
+--                  foreachAndPrint newList
+--collections _ =  let
+--                      newList = ["Hello", "Pure", "Functional","World"]
+--                      updatedList = mapListValues (input -> Text.toUppercase input) newList
+--                      maybeUser = getByIndex 1 updatedList
+--                      printLine (getOrElse "No user found" maybeUser)
 collections _ =  let
-                newList = appendedList
-                maybeUser = getByIndex 2 newList
-                printLine (getOrElse "No user found" maybeUser)
+                      newList = ["Hello", "Pure", "Functional","World"]
+                      updatedList = filterListValues (input -> Text.size input > 4) newList
+                      maybeUser = getByIndex 0 updatedList
+                      printLine (getOrElse "No user found" maybeUser)
