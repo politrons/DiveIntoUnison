@@ -11,23 +11,17 @@ use .base.io
 usersMap: Map Nat Text
 usersMap = Map.fromList [(1,"Politrons"),(2,"Bob"),(3,"Osmosis")]
 
+getMapElementById: Map Nat Text -> Nat -> Optional Text
+getMapElementById inputMap key =  Map.lookup key inputMap
+
 toUpperCaseMap : Map Nat Text -> Map Nat Text
 toUpperCaseMap inputMap = Map.map Text.toUppercase inputMap
 
-filterMap : Map Nat Text -> Map Nat Text
-filterMap inputMap = let
-            entries = Map.toList inputMap
-            filterEntries = List.filter (cases (k,v) -> Text.size v > 3) entries
-            Map.fromList filterEntries
-
--- Set
--- -------
-
-usersSet: Set Nat
-usersSet = Set.fromList[1,2,3,4,5]
-
---isMember: Nat -> Set Nat -> Boolean
---isMember num set = Set.member num set
+filterByStringLengthMap : Map Nat Text -> Map Nat Text
+filterByStringLengthMap inputMap = let
+                                    entries = Map.toList inputMap
+                                    filterEntries = List.filter (cases (k,v) -> Text.size v > 3) entries
+                                    Map.fromList filterEntries
 
 -- List
 -- -------
@@ -55,6 +49,15 @@ mapListValues func list = List.map func list
 filterListValues: (Text -> Boolean) -> [Text] -> [Text]
 filterListValues func list = List.filter func list
 
+-- Set
+-- -------
+
+usersSet: Set Nat
+usersSet = Set.fromList[1,2,3,4,5]
+
+--isMember: Nat -> Set Nat -> Boolean
+--isMember num set = Set.member num set
+
 collections : '{IO, Exception} ()
 -- [Main] Map
 -- -----------
@@ -63,9 +66,16 @@ collections : '{IO, Exception} ()
 --         match maybeUser with
 --            Some value -> printLine value
 --            None -> printLine "no record found"
+--collections _ =  let
+--              maybeUser =getMapElementById usersMap 2
+--              printLine (getOrElse "No user found" maybeUser)
+--collections _ =  let
+--            upperMap = toUpperCaseMap usersMap
+--            maybeUser = Map.lookup 1 upperMap
+--            printLine (getOrElse "No user found" maybeUser)
 collections _ =  let
-            upperMap = toUpperCaseMap usersMap
-            maybeUser = Map.lookup 1 upperMap
+            filterMap = filterByStringLengthMap usersMap
+            maybeUser = Map.lookup 3 filterMap
             printLine (getOrElse "No user found" maybeUser)
 
 -- [Main] Set
