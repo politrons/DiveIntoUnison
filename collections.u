@@ -8,15 +8,22 @@ use .base.io
 -- Map
 -- -------
 
+-- `usersMap` is a map that contains user IDs as keys and usernames as values.
 usersMap: Map Nat Text
 usersMap = Map.fromList [(1,"Politrons"),(2,"Bob"),(3,"Osmosis")]
 
+-- `getMapElementById` takes a map and a key, and returns the value associated with the key if it exists.
+-- It uses `Map.lookup` to find the value associated with the given key in the map.
 getMapElementById: Map Nat Text -> Nat -> Optional Text
 getMapElementById inputMap key =  Map.lookup key inputMap
 
+-- `toUpperCaseMap` converts all the text values in the map to uppercase.
+-- It applies the `Text.toUppercase` function to each value in the map using `Map.map`.
 toUpperCaseMap : Map Nat Text -> Map Nat Text
 toUpperCaseMap inputMap = Map.map Text.toUppercase inputMap
 
+-- `filterByStringLengthMap` filters the map to include only entries where the text value has more than 3 characters.
+-- It converts the map to a list of entries, filters it, and then converts it back to a map.
 filterByStringLengthMap : Map Nat Text -> Map Nat Text
 filterByStringLengthMap inputMap = let
                                     entries = Map.toList inputMap
@@ -26,40 +33,52 @@ filterByStringLengthMap inputMap = let
 -- List
 -- -------
 
+-- `usersList` is a list containing usernames.
 usersList: [Text]
 usersList =["Politrons","Bob"]
 
+-- `getByIndex` retrieves the element at a specified index from the list.
+-- It uses `List.at` which returns the element at the given index if it exists.
 getByIndex: Nat -> [Text] -> Optional Text
 getByIndex index array = List.at index array
 
--- Add a new entry to the beginning of the list
+-- `prependedList` adds a new entry ("Osmosis") to the beginning of `usersList`.
+-- It uses `List.cons` to prepend the new entry.
 prependedList : [Text]
 prependedList = List.cons "Osmosis" usersList
 
--- Add a new entry to the end of the list
+-- `appendedList` adds a new entry ("Osmosis") to the end of `usersList`.
+-- It uses `List.snoc` to append the new entry.
 appendedList : [Text]
 appendedList = List.snoc usersList "Osmosis"
 
+-- `foreachAndPrint` applies the `printLine` function to each element in the list.
+-- It uses `List.foreach` to iterate over the list and print each element.
 foreachAndPrint: [Text] -> ()
 foreachAndPrint list = List.foreach list printLine
 
+-- `mapListValues` applies a given function to each element in the list and returns a new list.
+-- It uses `List.map` to transform each element in the list according to the function.
 mapListValues: (Text -> Text) -> [Text] -> [Text]
 mapListValues func list = List.map func list
 
+-- `filterListValues` filters the list to include only elements that satisfy the given predicate function.
+-- It uses `List.filter` to select elements based on the predicate.
 filterListValues: (Text -> Boolean) -> [Text] -> [Text]
 filterListValues func list = List.filter func list
 
+-- `foldLeftAccumulateList` calculates the sum of all elements in a list of natural numbers.
+-- It uses `List.foldLeft` to accumulate the sum by starting with an initial value of 0 and adding each element.
 foldLeftAccumulateList: [Nat] -> Nat
 foldLeftAccumulateList list = List.foldLeft (acc x -> acc + x) 0 list
 
 -- Set
 -- -------
 
+-- `usersSet` is a set containing unique user IDs.
 usersSet: Set Nat
 usersSet = Set.fromList[1,2,3,4,5]
 
---isMember: Nat -> Set Nat -> Boolean
---isMember num set = Set.member num set
 
 collections : '{IO, Exception} ()
 -- [Main] Map
