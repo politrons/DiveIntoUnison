@@ -49,6 +49,9 @@ mapListValues func list = List.map func list
 filterListValues: (Text -> Boolean) -> [Text] -> [Text]
 filterListValues func list = List.filter func list
 
+foldLeftAccumulateList: [Nat] -> Nat
+foldLeftAccumulateList list = List.foldLeft (acc x -> acc + x) 0 list
+
 -- Set
 -- -------
 
@@ -73,16 +76,11 @@ collections : '{IO, Exception} ()
 --            upperMap = toUpperCaseMap usersMap
 --            maybeUser = Map.lookup 1 upperMap
 --            printLine (getOrElse "No user found" maybeUser)
-collections _ =  let
-            filterMap = filterByStringLengthMap usersMap
-            maybeUser = Map.lookup 3 filterMap
-            printLine (getOrElse "No user found" maybeUser)
+--collections _ =  let
+--            filterMap = filterByStringLengthMap usersMap
+--            maybeUser = Map.lookup 3 filterMap
+--            printLine (getOrElse "No user found" maybeUser)
 
--- [Main] Set
--- -----------
-
--- collections _ =  let
---                    printLine (Text.fromBoolean(isMember 1 usersSet))
 -- [Main] List
 -- -----------
 --collections _ =  let
@@ -109,3 +107,12 @@ collections _ =  let
 --                      updatedList = filterListValues (input -> Text.size input > 4) newList
 --                      maybeUser = getByIndex 0 updatedList
 --                      printLine (getOrElse "No user found" maybeUser)
+collections _ =  let
+                accNumber = foldLeftAccumulateList [1,2,3,4,5]
+                printLine (Nat.toText accNumber)
+
+-- [Main] Set
+-- -----------
+
+-- collections _ =  let
+--                    printLine (Text.fromBoolean(isMember 1 usersSet))
