@@ -11,16 +11,14 @@ use .base.io
 usersMap: Map Nat Text
 usersMap = Map.fromList [(1,"Politrons"),(2,"Bob"),(3,"Osmosis")]
 
-toUpperCaseMap : Map Nat Text
-toUpperCaseMap = Map.map Text.toUppercase usersMap
+toUpperCaseMap : Map Nat Text -> Map Nat Text
+toUpperCaseMap inputMap = Map.map Text.toUppercase inputMap
 
 filterMap : Map Nat Text -> Map Nat Text
 filterMap inputMap = let
             entries = Map.toList inputMap
-            filteredEntries = List.filter (entry ->
-                 match entry with
-                   (k, v) -> Text.size v > 3) entries
-            filteredMap = Map.fromList filterEntries
+            filterEntries = List.filter (cases (k,v) -> Text.size v > 3) entries
+            Map.fromList filterEntries
 
 -- Set
 -- -------
@@ -66,7 +64,7 @@ collections : '{IO, Exception} ()
 --            Some value -> printLine value
 --            None -> printLine "no record found"
 collections _ =  let
-            upperMap = toUpperCaseMap
+            upperMap = toUpperCaseMap usersMap
             maybeUser = Map.lookup 1 upperMap
             printLine (getOrElse "No user found" maybeUser)
 
