@@ -1,0 +1,30 @@
+use .base.io.IO
+use .base.Text
+use .base.Int
+use .base.List
+
+--[Optional Effect]
+-- -----------------
+
+findElement : Text -> [Text] -> Optional Text
+findElement target list = List.find (element -> element == target) list
+
+handleOption : Optional Text -> Text
+handleOption maybeText = match maybeText with
+                            Some text -> text
+                            None -> "Element not found"
+
+createOptional : Text -> Optional Text
+createOptional value = Some value
+
+--[Main Execution]
+-- ------------
+effectSystems : '{IO, Exception} ()
+--effectSystems _ = let
+--                    maybeElement = findElement "hello" ["hello", "functional", "world"]
+--                    printLine (getOrElse "No element found" maybeElement)
+--effectSystems _ = let
+--                    maybeElement = findElement "world" ["hello", "functional", "world"]
+--                    element = handleOption maybeElement
+--                    printLine element
+effectSystems  _ = printLine (getOrElse "No element found" (createOptional "hello unison"))
