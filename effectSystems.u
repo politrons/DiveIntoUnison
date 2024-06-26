@@ -4,7 +4,7 @@ use .base.Int
 use .base.List
 
 --[Optional Effect]
--- -----------------
+-- ----------------
 
 findElement : Text -> [Text] -> Optional Text
 findElement target list = List.find (element -> element == target) list
@@ -17,9 +17,32 @@ handleOption maybeText = match maybeText with
 createOptional : Text -> Optional Text
 createOptional value = Some value
 
+--[Either Effect]
+-- --------------
+
+-- A function that divides two numbers and uses `Either` to handle division by zero effect as [Left]
+divide : Nat -> Nat -> Either Text Nat
+divide x y =
+    if y == 0  then
+        Left "Division by zero!"
+    else
+        Right (x / y)
+
+--[Failure Effect]
+-- ---------------
+
+failure: Failure
+failure =
+     Generic.failure
+        "A side effect happens here" ""
+
+
 --[Main Execution]
--- ------------
+-- ---------------
 effectSystems : '{IO, Exception} ()
+
+--[Optional Main]
+-- ---------------
 --effectSystems _ = let
 --                    maybeElement = findElement "hello" ["hello", "functional", "world"]
 --                    printLine (getOrElse "No element found" maybeElement)
@@ -27,4 +50,20 @@ effectSystems : '{IO, Exception} ()
 --                    maybeElement = findElement "world" ["hello", "functional", "world"]
 --                    element = handleOption maybeElement
 --                    printLine element
-effectSystems  _ = printLine (getOrElse "No element found" (createOptional "hello unison"))
+--effectSystems  _ = printLine (getOrElse "No element found" (createOptional "hello unison"))
+
+--[Try Main]
+-- ---------------
+--effectSystems  _ = let
+--                divideTry = divide 4 2
+--                result = match divideTry with
+--                    Right value -> Nat.toText value
+--                    Left error -> error
+--                printLine result
+
+--[Failure Main]
+-- ---------------
+effectSystems _ = let
+                errorText = match failure with
+                    Failure errorType desc any -> desc
+                printLine errorText
