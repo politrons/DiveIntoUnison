@@ -56,7 +56,7 @@ effectSystems : '{IO, Exception} ()
 --                    printLine element
 --effectSystems  _ = printLine (getOrElse "No element found" (createOptional "hello unison"))
 
---[Try Main]
+--[Either Main]
 -- ---------------
 --effectSystems  _ = let
 --                divideTry = divide 4 2
