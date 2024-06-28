@@ -17,6 +17,8 @@ handleOption maybeText = match maybeText with
 createOptional : Text -> Optional Text
 createOptional value = Some value
 
+mapOptionalValues
+
 --[Either Effect]
 -- --------------
 
@@ -27,6 +29,8 @@ divide x y =
         Left "Division by zero!"
     else
         Right (x / y)
+
+
 
 --[Failure Effect]
 -- ---------------
