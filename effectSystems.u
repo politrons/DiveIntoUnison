@@ -17,10 +17,17 @@ handleOption maybeText = match maybeText with
 createOptional : Text -> Optional Text
 createOptional value = Some value
 
-mapOptionalValues
+mapOptionalValues: Optional Text -> Optional Text
+mapOptionalValues maybeText = Optional.map (text -> Text.toUppercase text) maybeText
+
+filterOptionalValues: Optional Text -> Optional Text
+filterOptionalValues maybeText = Optional.filter (text -> Text.size text > 5) maybeText
 
 --[Either Effect]
 -- --------------
+
+createEither: Text -> Either Failure Text
+createEither text = Right text
 
 -- A function that divides two numbers and uses `Either` to handle division by zero effect as [Left]
 divide : Nat -> Nat -> Either Text Nat
@@ -29,7 +36,6 @@ divide x y =
         Left "Division by zero!"
     else
         Right (x / y)
-
 
 
 --[Failure Effect]
@@ -56,8 +62,25 @@ effectSystems : '{IO, Exception} ()
 --                    printLine element
 --effectSystems  _ = printLine (getOrElse "No element found" (createOptional "hello unison"))
 
+--effectSystems  _ = let
+--                    maybeText = createOptional "hello unison"
+--                    maybeTextUpper = mapOptionalValues maybeText
+--                    printLine (getOrElse "No element found" maybeTextUpper)
+
+effectSystems  _ = let
+                    maybeText = createOptional "hello unison"
+                    maybeFilterText = filterOptionalValues maybeText
+                    printLine (getOrElse "No element found" maybeFilterText)
+
 --[Either Main]
 -- ---------------
+--effectSystems  _ = let
+--                either = createEither "Hello Either"
+--                result = match either with
+--                    Right value -> value
+--                    Left error -> "We have a problem"
+--                printLine result
+
 --effectSystems  _ = let
 --                divideTry = divide 4 2
 --                result = match divideTry with
@@ -67,7 +90,7 @@ effectSystems : '{IO, Exception} ()
 
 --[Failure Main]
 -- ---------------
-effectSystems _ = let
-                errorText = match failure with
-                    Failure errorType desc any -> desc
-                printLine errorText
+--effectSystems _ = let
+--                errorText = match failure with
+--                    Failure errorType desc any -> desc
+--                printLine errorText
