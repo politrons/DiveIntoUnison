@@ -30,8 +30,8 @@ createEither: Text -> Either Failure Text
 createEither text = Right text
 
 -- A function that divides two numbers and uses `Either` to handle division by zero effect as [Left]
-divide : Nat -> Nat -> Either Text Nat
-divide x y =
+eitherSideEffect : Nat -> Nat -> Either Text Nat
+eitherSideEffect x y =
     if y == 0  then
         Left "Division by zero!"
     else
@@ -82,7 +82,7 @@ effectSystems  _ = let
 --                printLine result
 
 --effectSystems  _ = let
---                divideTry = divide 4 2
+--                divideTry = eitherSideEffect 4 2
 --                result = match divideTry with
 --                    Right value -> Nat.toText value
 --                    Left error -> error
