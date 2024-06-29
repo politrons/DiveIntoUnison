@@ -5,6 +5,6 @@
 
 * **[Functions](functions.u)**
 * **[Collections](collections.u)**
-* **[Pattern Matching](patternMatching.u)*
+* **[Pattern Matching](patternMatching.u)**
 * **[Effect systems](effectSystems.u)**
 
