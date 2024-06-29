@@ -38,6 +38,12 @@ eitherSideEffect x y =
         Right (x / y)
 
 
+eitherMap : Either Failure Text -> (Text -> Text) -> Either Failure Text
+eitherMap either mapFunc= let
+                match either with
+                       Right value ->  Right (mapFunc value)
+                       Left error -> Left error
+
 --[Failure Effect]
 -- ---------------
 
@@ -67,10 +73,10 @@ effectSystems : '{IO, Exception} ()
 --                    maybeTextUpper = mapOptionalValues maybeText
 --                    printLine (getOrElse "No element found" maybeTextUpper)
 
-effectSystems  _ = let
-                    maybeText = createOptional "hello unison"
-                    maybeFilterText = filterOptionalValues maybeText
-                    printLine (getOrElse "No element found" maybeFilterText)
+--effectSystems  _ = let
+--                    maybeText = createOptional "hello unison"
+--                    maybeFilterText = filterOptionalValues maybeText
+--                    printLine (getOrElse "No element found" maybeFilterText)
 
 --[Either Main]
 -- ---------------
@@ -87,6 +93,14 @@ effectSystems  _ = let
 --                    Right value -> Nat.toText value
 --                    Left error -> error
 --                printLine result
+
+effectSystems  _ = let
+                either = createEither "Hello Either"
+                eitherUpper = eitherMap either (text -> Text.toUppercase text)
+                result = match eitherUpper with
+                    Right value -> value
+                    Left error -> "We have a problem"
+                printLine result
 
 --[Failure Main]
 -- ---------------
