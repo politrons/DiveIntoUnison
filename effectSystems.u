@@ -6,26 +6,32 @@ use .base.List
 --[Optional Effect]
 -- ----------------
 
+-- Finds an element in a list of Text values, returning it as an Optional Text.
 findElement : Text -> [Text] -> Optional Text
 findElement target list = List.find (element -> element == target) list
 
+-- Handles an Optional Text, returning the text if it exists, or "Element not found" if it doesn't.
 handleOption : Optional Text -> Text
 handleOption maybeText = match maybeText with
                             Some text -> text
                             None -> "Element not found"
 
+-- Creates an Optional Text from a given Text value.
 createOptional : Text -> Optional Text
 createOptional value = Some value
 
+-- Maps a function over an Optional Text, converting it to uppercase if it exists.
 mapOptionalValues: Optional Text -> Optional Text
 mapOptionalValues maybeText = Optional.map (text -> Text.toUppercase text) maybeText
 
+-- Filters an Optional Text, keeping it only if its size is greater than 5.
 filterOptionalValues: Optional Text -> Optional Text
 filterOptionalValues maybeText = Optional.filter (text -> Text.size text > 5) maybeText
 
 --[Either Effect]
 -- --------------
 
+-- Creates an Either type with the given Text as the Right value.
 createEither: Text -> Either Failure Text
 createEither text = Right text
 
@@ -37,7 +43,7 @@ eitherSideEffect x y =
     else
         Right (x / y)
 
-
+-- Maps a function over the Right value of an Either, leaving the Left value unchanged.
 eitherMap : Either Failure Text -> (Text -> Text) -> Either Failure Text
 eitherMap either mapFunc= let
                 match either with
