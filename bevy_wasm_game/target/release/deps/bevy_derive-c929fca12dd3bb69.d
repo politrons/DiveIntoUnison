@@ -1,0 +1,9 @@
+/Users/pablogarcia/Development/bevy_wasm_game/target/release/deps/libbevy_derive-c929fca12dd3bb69.dylib: /Users/pablogarcia/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_derive-0.13.2/src/lib.rs /Users/pablogarcia/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_derive-0.13.2/src/app_plugin.rs /Users/pablogarcia/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_derive-0.13.2/src/bevy_main.rs /Users/pablogarcia/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_derive-0.13.2/src/derefs.rs /Users/pablogarcia/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_derive-0.13.2/src/enum_variant_meta.rs
+
+/Users/pablogarcia/Development/bevy_wasm_game/target/release/deps/bevy_derive-c929fca12dd3bb69.d: /Users/pablogarcia/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_derive-0.13.2/src/lib.rs /Users/pablogarcia/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_derive-0.13.2/src/app_plugin.rs /Users/pablogarcia/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_derive-0.13.2/src/bevy_main.rs /Users/pablogarcia/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_derive-0.13.2/src/derefs.rs /Users/pablogarcia/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_derive-0.13.2/src/enum_variant_meta.rs
+
+/Users/pablogarcia/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_derive-0.13.2/src/lib.rs:
+/Users/pablogarcia/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_derive-0.13.2/src/app_plugin.rs:
+/Users/pablogarcia/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_derive-0.13.2/src/bevy_main.rs:
+/Users/pablogarcia/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_derive-0.13.2/src/derefs.rs:
+/Users/pablogarcia/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bevy_derive-0.13.2/src/enum_variant_meta.rs:
